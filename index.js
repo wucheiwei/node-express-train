@@ -12,11 +12,12 @@ app.get("/",function(req,res){
 app.get("/getData",function(req,res){
     const name = req.query.city;
     if (name == 'taipei') {
-        res.send("人口:250萬")
+        let data = {pop:300};
+        res.send(data);
     } else if (name == 'hsinchu') {
-        res.send("人口:100萬")
+        res.send({pop:40});
     } else {
-        res.send("沒有資料");
+        res.redirect("https://www.google.com/search?q="+name);
     }
 });
 app.listen(3000,()=>{
