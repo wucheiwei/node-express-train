@@ -1,5 +1,7 @@
 const express = require("express");
 const app = express();
+app.set("view engine","ejs");
+app.set("views","./views");
 app.use(express.static("public"));
 app.get("/",function(req,res){
     const lang = req.get('accept-language');
@@ -14,9 +16,10 @@ app.get("/getData",function(req,res){
     const name = req.query.city;
     if (name == 'taipei') {
         let data = {pop:300, name:"台北市"};
-        res.send(data);
+        res.render("city.ejs",data);
     } else if (name == 'hsinchu') {
-        res.send({pop:40, name:"新竹市"});
+        let data = {pop:40, name:"新竹市"};
+        res.render("city.ejs",data);
     } else {
         res.redirect("https://www.google.com/search?q="+name);
     }
