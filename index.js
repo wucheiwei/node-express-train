@@ -12,10 +12,10 @@ app.get("/",function(req,res){
 app.get("/getData",function(req,res){
     const name = req.query.city;
     if (name == 'taipei') {
-        let data = {pop:300};
+        let data = {pop:300, name:"台北市"};
         res.send(data);
     } else if (name == 'hsinchu') {
-        res.send({pop:40});
+        res.send({pop:40, name:"新竹市"});
     } else {
         res.redirect("https://www.google.com/search?q="+name);
     }
