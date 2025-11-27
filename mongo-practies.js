@@ -11,24 +11,15 @@ async function main() {
         console.log("連接成功");
         let db = client.db("last");
         let collection = db.collection("user");
-        let result = await collection.insertMany([
-            {
-                email: "aaa@aaa.com",
-                password: 'aaa',
-                level: 1
-            },
-            {
-                email: "bbb@bbb.com",
-                password: 'bbb',
-                level: 2
-            },
-            {
-                email: "ccc@ccc.com",
-                password: 'ccc',
-                level: 3
+        let result = await collection.updateMany({
+            level: 1
+        }, {
+            $unset: {
+                role: 'reader',
             }
-        ]);
-        console.log("資料已插入", result.insertedIds);
+        });
+        console.log("符合資料的比數",result.matchedCount);
+        console.log("資料已更新", result.modifiedCount);
     } catch (err) {
         console.error("連接失敗", err);
     } finally {
